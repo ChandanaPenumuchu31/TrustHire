@@ -116,6 +116,123 @@
   padding: 5px 0;
 }
 
+/* NEW: Detailed Fraud Analysis Styles */
+.detailed-fraud-analysis {
+  background: #f8f9fa;
+  border: 2px solid #e0e0e0;
+  border-radius: 10px;
+  padding: 15px;
+  margin-top: 15px;
+}
+
+.fraud-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  user-select: none;
+  color: #333;
+  font-size: 1rem;
+  padding: 5px 0;
+}
+
+.fraud-header:hover {
+  color: #667eea;
+}
+
+.toggle-icon {
+  color: #667eea;
+  font-size: 0.8rem;
+  transition: transform 0.3s ease;
+}
+
+.fraud-details {
+  margin-top: 15px;
+  padding-top: 15px;
+  border-top: 1px solid #e0e0e0;
+}
+
+.fraud-reason-item {
+  background: #fff3cd;
+  border-left: 4px solid #ff9800;
+  padding: 10px 15px;
+  margin: 10px 0;
+  border-radius: 5px;
+  color: #856404;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.verification-section {
+  background: #e7f3ff;
+  border-left: 4px solid #2196f3;
+  padding: 12px 15px;
+  margin: 10px 0;
+  border-radius: 5px;
+}
+
+.verification-section strong {
+  color: #1976d2;
+  display: block;
+  margin-bottom: 8px;
+  font-size: 0.95rem;
+}
+
+.verification-section p {
+  margin: 5px 0;
+  color: #555;
+  font-size: 0.9rem;
+}
+
+/* Review Samples Styling */
+.verification-section.review-samples {
+  background: #f0f9ff;
+  border-left: 4px solid #3b82f6;
+}
+
+.review-rating {
+  color: #1e40af;
+  font-size: 0.95rem;
+  margin: 8px 0;
+  font-weight: 500;
+}
+
+.review-rating .sentiment {
+  color: #64748b;
+  font-weight: normal;
+  text-transform: capitalize;
+}
+
+.review-list {
+  margin-top: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.review-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 10px;
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 8px;
+  border: 1px solid rgba(59, 130, 246, 0.2);
+}
+
+.review-icon {
+  font-size: 1.1rem;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.review-text {
+  color: #334155;
+  font-size: 0.88rem;
+  line-height: 1.5;
+  font-style: italic;
+}
+
 .fraud-signals {
   background: #fff3e0;
   border-left: 4px solid #ff9800;
@@ -220,8 +337,14 @@
 }
 
 .report-form h4 {
-  margin-bottom: 12px;
+  margin-bottom: 8px;
   color: #333;
+}
+
+.report-help {
+  color: #666;
+  font-size: 0.9rem;
+  margin-bottom: 12px;
 }
 
 .report-form textarea {

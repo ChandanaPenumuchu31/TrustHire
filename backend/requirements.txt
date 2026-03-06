@@ -8,6 +8,12 @@ beautifulsoup4==4.12.2
 selenium==4.15.2
 requests==2.31.0
 lxml==4.9.3
+webdriver-manager==4.0.1
+cloudscraper==1.2.71
+playwright==1.40.0
+httpx==0.25.2
+undetected-chromedriver==3.5.4
+selenium-stealth==1.0.6
 
 # Machine Learning & NLP
 scikit-learn==1.3.2
@@ -15,6 +21,8 @@ pandas==2.1.4
 numpy==1.26.2
 nltk==3.8.1
 textblob==0.17.1
+xgboost==2.0.3
+lightgbm==4.1.0
 
 # Database
 sqlalchemy==2.0.23
@@ -29,3 +37,13 @@ python-dateutil==2.8.2
 
 # API Documentation
 flasgger==0.9.7.1
+
+# LLM and Advanced AI
+langchain==0.1.0
+transformers==4.36.0
+torch==2.1.0
+google-genai>=1.0.0
+
+# Company Verification
+googlesearch-python==1.2.3
+wikipedia==1.4.0

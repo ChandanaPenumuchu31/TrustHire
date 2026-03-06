@@ -7,8 +7,9 @@ from typing import List, Dict, Optional
 import time
 import requests
 from bs4 import BeautifulSoup
-from datetime import datetime
+from datetime import datetime, timedelta
 import logging
+import re
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -55,6 +56,42 @@ class BaseScraper(ABC):
             return ''
         return ' '.join(text.strip().split())
     
+    def _clean_html(self, html_text: str, max_length: int = 2000) -> str:
+        """Remove HTML tags and clean text for descriptions"""
+        if not html_text:
+            return ''
+        
+        try:
+            # Parse HTML
+            soup = BeautifulSoup(html_text, 'html.parser')
+            
+            # Remove script and style elements
+            for script in soup(['script', 'style']):
+                script.decompose()
+            
+            # Get text and clean it
+            text = soup.get_text(separator=' ')
+            
+            # Clean up whitespace
+            lines = (line.strip() for line in text.splitlines())
+            chunks = (phrase.strip() for line in lines for phrase in line.split("  "))
+            text = ' '.join(chunk for chunk in chunks if chunk)
+            
+            # Only truncate if exceeds max_length (now 2000)
+            if len(text) > max_length:
+                text = text[:max_length] + '...'
+            
+            return text
+            
+        except Exception as e:
+            logger.debug(f"Error cleaning HTML: {e}")
+            # Fallback: simple regex to remove HTML tags
+            text = re.sub(r'<[^>]+>', ' ', html_text)
+            text = re.sub(r'\s+', ' ', text).strip()
+            if len(text) > max_length:
+                text = text[:max_length] + '...'
+            return text
+    
     def _parse_date(self, date_str: str) -> Optional[datetime]:
         """Parse date string to datetime"""
         if not date_str:
@@ -83,7 +120,7 @@ class BaseScraper(ABC):
             'title': self._clean_text(raw_data.get('title', '')),
             'company': self._clean_text(raw_data.get('company', '')),
             'location': self._clean_text(raw_data.get('location', '')),
-            'description': self._clean_text(raw_data.get('description', '')),
+            'description': self._clean_html(raw_data.get('description', ''), max_length=2000),  # Increased to 2000
             'requirements': self._clean_text(raw_data.get('requirements', '')),
             'salary': self._clean_text(raw_data.get('salary', '')),
             'experience_required': self._clean_text(raw_data.get('experience_required', '')),

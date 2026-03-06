@@ -53,7 +53,7 @@ function SearchBar({ onSearch, onLoading }) {
             <label>🔍 Job Title / Keywords *</label>
             <input
               type="text"
-              placeholder="e.g., Software Engineer, Data Analyst..."
+              placeholder="e.g., Software Engineer, Data Analyst, Python Developer..."
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               className="input-field"
@@ -64,7 +64,7 @@ function SearchBar({ onSearch, onLoading }) {
             <label>📍 Location</label>
             <input
               type="text"
-              placeholder="e.g., San Francisco, Remote..."
+              placeholder="e.g., Hyderabad, India or Bangalore, India..."
               value={location}
               onChange={(e) => setLocation(e.target.value)}
               className="input-field"
@@ -89,14 +89,17 @@ function SearchBar({ onSearch, onLoading }) {
         <div className="platform-selector">
           <label>Platforms:</label>
           <div className="platform-buttons">
-            {['all', 'linkedin', 'indeed', 'naukri'].map((platform) => (
+            {['all', 'remoteok', 'remotive'].map((platform) => (
               <button
                 key={platform}
                 type="button"
                 className={`platform-btn ${selectedPlatforms.includes(platform) ? 'active' : ''}`}
                 onClick={() => togglePlatform(platform)}
               >
-                {platform === 'all' ? '🌐 All' : platform.charAt(0).toUpperCase() + platform.slice(1)}
+                {platform === 'all' ? '🌐 All' : 
+                 platform === 'remoteok' ? 'RemoteOK' :
+                 platform === 'remotive' ? 'Remotive' :
+                 platform.charAt(0).toUpperCase() + platform.slice(1)}
               </button>
             ))}
           </div>
@@ -105,7 +108,7 @@ function SearchBar({ onSearch, onLoading }) {
         {error && <div className="error-message">{error}</div>}
 
         <button type="submit" className="search-button">
-          Search Jobs
+          🔍 Search Jobs Across All Platforms
         </button>
       </form>
     </div>

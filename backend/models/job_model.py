@@ -6,9 +6,8 @@ from typing import List, Dict
 from concurrent.futures import ThreadPoolExecutor, as_completed
 import logging
 
-from scrapers.linkedin_scraper import LinkedInScraper
-from scrapers.indeed_scraper import IndeedScraper
-from scrapers.naukri_scraper import NaukriScraper
+from scrapers.remoteok_scraper import RemoteOKScraper
+from scrapers.remotive_scraper import RemotiveScraper
 from models.fraud_detector import get_fraud_detector
 from database import db, Job, SearchHistory
 from datetime import datetime
@@ -17,14 +16,13 @@ import json
 logger = logging.getLogger(__name__)
 
 class JobAggregator:
-    """Aggregate jobs from multiple platforms"""
+    """Aggregate jobs from multiple platforms - using only working, API-based scrapers"""
     
     def __init__(self):
-        """Initialize scrapers"""
+        """Initialize scrapers - RemoteOK and Remotive both have working APIs"""
         self.scrapers = {
-            'linkedin': LinkedInScraper(),
-            'indeed': IndeedScraper(),
-            'naukri': NaukriScraper()
+            'remoteok': RemoteOKScraper(),
+            'remotive': RemotiveScraper()
         }
         self.fraud_detector = get_fraud_detector()
     
@@ -40,7 +38,7 @@ class JobAggregator:
         all_jobs = []
         
         # Use ThreadPoolExecutor for parallel scraping
-        with ThreadPoolExecutor(max_workers=3) as executor:
+        with ThreadPoolExecutor(max_workers=5) as executor:
             future_to_platform = {}
             
             for platform in platforms:
@@ -72,7 +70,7 @@ class JobAggregator:
         return all_jobs
     
     def _apply_fraud_detection(self, jobs: List[Dict]) -> List[Dict]:
-        """Apply fraud detection to job listings"""
+        """Apply fraud detection to job listings with detailed reasons"""
         for job in jobs:
             try:
                 fraud_result = self.fraud_detector.predict(job)
@@ -80,12 +78,16 @@ class JobAggregator:
                 job['is_fraudulent'] = fraud_result['is_fraudulent']
                 job['fraud_confidence'] = fraud_result['fraud_confidence']
                 job['fraud_signals'] = fraud_result['fraud_signals']
+                job['detailed_reasons'] = fraud_result.get('detailed_reasons', [])
+                job['mca_verification'] = fraud_result.get('mca_verification', {})
+                job['company_reviews'] = fraud_result.get('company_reviews', {})
             except Exception as e:
                 logger.error(f"Error in fraud detection: {e}")
                 job['trust_score'] = 0.5
                 job['is_fraudulent'] = False
                 job['fraud_confidence'] = 0.0
                 job['fraud_signals'] = []
+                job['detailed_reasons'] = []
         
         return jobs
     

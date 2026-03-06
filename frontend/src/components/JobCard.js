@@ -4,6 +4,7 @@ import './JobCard.css';
 function JobCard({ job }) {
   const [expanded, setExpanded] = useState(false);
   const [showReportForm, setShowReportForm] = useState(false);
+  const [showDetailedReasons, setShowDetailedReasons] = useState(false);
 
   const getTrustColor = (score) => {
     if (score >= 0.7) return '#4caf50';
@@ -17,11 +18,22 @@ function JobCard({ job }) {
     return 'Caution';
   };
 
+  const getPlatformIcon = (platform) => {
+    const icons = {
+      'linkedin': '💼',
+      'indeed': '🔵',
+      'naukri': '🟢',
+      'careers': '🏢',
+      'government': '🏛️'
+    };
+    return icons[platform] || '📋';
+  };
+
   return (
     <div className={`job-card ${job.is_fraudulent ? 'flagged' : ''}`}>
       {job.is_fraudulent && (
         <div className="fraud-banner">
-          ⚠️ This job has been flagged as potentially fraudulent
+          ⚠️ WARNING: This job has been flagged as potentially fraudulent
         </div>
       )}
 
@@ -76,9 +88,49 @@ function JobCard({ job }) {
           </button>
         )}
 
+        {/* Detailed Fraud Reasons - NEW */}
+        {job.detailed_reasons && job.detailed_reasons.length > 0 && (
+          <div className="detailed-fraud-analysis">
+            <div className="fraud-header" onClick={() => setShowDetailedReasons(!showDetailedReasons)}>
+              <strong>🔍 Fraud Analysis Details</strong>
+              <span className="toggle-icon">{showDetailedReasons ? '▼' : '▶'}</span>
+            </div>
+            {showDetailedReasons && (
+              <div className="fraud-details">
+                {job.detailed_reasons.map((reason, idx) => (
+                  <div key={idx} className="fraud-reason-item">
+                    {reason}
+                  </div>
+                ))}
+                
+                {/* Employee Reviews - Display actual review samples */}
+                {job.company_verification?.reviews?.samples && job.company_verification.reviews.samples.length > 0 && (
+                  <div className="verification-section review-samples">
+                    <strong>💬 Employee Reviews ({job.company_verification.reviews.total_reviews || 0} total):</strong>
+                    <div className="review-rating">
+                      ⭐ {job.company_verification.reviews.average_rating}/5.0 
+                      {job.company_verification.reviews.sentiment && (
+                        <span className="sentiment"> • {job.company_verification.reviews.sentiment}</span>
+                      )}
+                    </div>
+                    <div className="review-list">
+                      {job.company_verification.reviews.samples.slice(0, 3).map((review, idx) => (
+                        <div key={idx} className="review-item">
+                          <span className="review-icon">💭</span>
+                          <span className="review-text">"{review}"</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
+            )}
+          </div>
+        )}
+
         {job.fraud_signals && job.fraud_signals.length > 0 && (
           <div className="fraud-signals">
-            <strong>⚠️ Warning Signs:</strong>
+            <strong>⚠️ Warning Signs Detected:</strong>
             <ul>
               {job.fraud_signals.map((signal, idx) => (
                 <li key={idx}>{signal}</li>
@@ -90,7 +142,9 @@ function JobCard({ job }) {
 
       <div className="job-footer">
         <div className="job-tags">
-          <span className="tag platform-tag">{job.platform}</span>
+          <span className="tag platform-tag">
+            {getPlatformIcon(job.platform)} {job.platform}
+          </span>
           {job.job_type && <span className="tag">{job.job_type}</span>}
         </div>
 
@@ -101,23 +155,24 @@ function JobCard({ job }) {
             rel="noopener noreferrer" 
             className="btn btn-primary"
           >
-            View Job
+            View Original Job
           </a>
           <button 
             className="btn btn-secondary"
             onClick={() => setShowReportForm(!showReportForm)}
           >
-            🚩 Report
+            🚩 Report Fraud
           </button>
         </div>
       </div>
 
       {showReportForm && (
         <div className="report-form">
-          <h4>Report this job</h4>
+          <h4>Report this job as fraudulent</h4>
+          <p className="report-help">Help the community by reporting suspicious job postings</p>
           <textarea 
-            placeholder="Please describe why you think this job is fraudulent..."
-            rows="3"
+            placeholder="Please describe why you think this job is fraudulent (e.g., asks for money upfront, suspicious company name, unrealistic salary promises)..."
+            rows="4"
           />
           <div className="report-actions">
             <button className="btn btn-primary btn-sm">Submit Report</button>

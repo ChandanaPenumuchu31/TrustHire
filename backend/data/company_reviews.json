@@ -1,0 +1,139 @@
+{
+  "companies": {
+    "Google": {
+      "rating": 4.4,
+      "reviews": 15420,
+      "is_legitimate": true,
+      "glassdoor": 4.4,
+      "indeed": 4.3,
+      "google": 4.5,
+      "sentiment": "positive"
+    },
+    "Microsoft": {
+      "rating": 4.3,
+      "reviews": 12800,
+      "is_legitimate": true,
+      "glassdoor": 4.3,
+      "indeed": 4.2,
+      "google": 4.4,
+      "sentiment": "positive"
+    },
+    "Amazon": {
+      "rating": 3.8,
+      "reviews": 18900,
+      "is_legitimate": true,
+      "glassdoor": 3.8,
+      "indeed": 3.7,
+      "google": 3.9,
+      "sentiment": "mixed"
+    },
+    "Meta": {
+      "rating": 4.2,
+      "reviews": 9500,
+      "is_legitimate": true,
+      "glassdoor": 4.2,
+      "indeed": 4.1,
+      "google": 4.3,
+      "sentiment": "positive"
+    },
+    "Apple": {
+      "rating": 4.3,
+      "reviews": 11200,
+      "is_legitimate": true,
+      "glassdoor": 4.3,
+      "indeed": 4.2,
+      "google": 4.4,
+      "sentiment": "positive"
+    },
+    "TCS": {
+      "rating": 3.7,
+      "reviews": 25400,
+      "is_legitimate": true,
+      "glassdoor": 3.7,
+      "indeed": 3.6,
+      "google": 3.8,
+      "sentiment": "mixed"
+    },
+    "Infosys": {
+      "rating": 3.6,
+      "reviews": 21800,
+      "is_legitimate": true,
+      "glassdoor": 3.6,
+      "indeed": 3.5,
+      "google": 3.7,
+      "sentiment": "mixed"
+    },
+    "Wipro": {
+      "rating": 3.5,
+      "reviews": 19200,
+      "is_legitimate": true,
+      "glassdoor": 3.5,
+      "indeed": 3.4,
+      "google": 3.6,
+      "sentiment": "mixed"
+    },
+    "Accenture": {
+      "rating": 4.0,
+      "reviews": 16700,
+      "is_legitimate": true,
+      "glassdoor": 4.0,
+      "indeed": 3.9,
+      "google": 4.1,
+      "sentiment": "positive"
+    },
+    "IBM": {
+      "rating": 3.9,
+      "reviews": 14300,
+      "is_legitimate": true,
+      "glassdoor": 3.9,
+      "indeed": 3.8,
+      "google": 4.0,
+      "sentiment": "mixed"
+    },
+    "Deloitte": {
+      "rating": 4.0,
+      "reviews": 13200,
+      "is_legitimate": true,
+      "glassdoor": 4.0,
+      "indeed": 3.9,
+      "google": 4.1,
+      "sentiment": "positive"
+    },
+    "Cognizant": {
+      "rating": 3.7,
+      "reviews": 17800,
+      "is_legitimate": true,
+      "glassdoor": 3.7,
+      "indeed": 3.6,
+      "google": 3.8,
+      "sentiment": "mixed"
+    },
+    "Unknown Small Company": {
+      "rating": 0.0,
+      "reviews": 0,
+      "is_legitimate": false,
+      "glassdoor": 0.0,
+      "indeed": 0.0,
+      "google": 0.0,
+      "sentiment": "suspicious"
+    }
+  },
+  "default_legitimate": {
+    "rating": 3.8,
+    "reviews": 150,
+    "is_legitimate": true,
+    "glassdoor": 3.8,
+    "indeed": 3.7,
+    "google": 3.9,
+    "sentiment": "neutral"
+  },
+  "default_suspicious": {
+    "rating": 0.0,
+    "reviews": 0,
+    "is_legitimate": false,
+    "glassdoor": 0.0,
+    "indeed": 0.0,
+    "google": 0.0,
+    "sentiment": "suspicious"
+  }
+}

@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import './App.css';
 import SearchBar from './components/SearchBar';
 import JobList from './components/JobList';
-import Statistics from './components/Statistics';
 import Header from './components/Header';
 
 function App() {
@@ -27,7 +26,7 @@ function App() {
         {loading && (
           <div className="loading-container">
             <div className="spinner"></div>
-            <p>Searching across multiple platforms and analyzing jobs...</p>
+            <p>Searching across multiple platforms and analyzing jobs for fraud...</p>
           </div>
         )}
         {!loading && searchPerformed && (
@@ -36,32 +35,31 @@ function App() {
         {!searchPerformed && !loading && (
           <div className="welcome-section">
             <h2>🎯 Welcome to TrustHire</h2>
-            <p className="subtitle">Your trusted job search companion</p>
+            <p className="subtitle">Your trusted job search companion with AI-powered fraud detection</p>
             <div className="features">
               <div className="feature-card">
                 <span className="feature-icon">🔍</span>
                 <h3>Multi-Platform Search</h3>
-                <p>Search across LinkedIn, Indeed, and Naukri in one place</p>
+                <p>Search across RemoteOK and Remotive for remote jobs</p>
               </div>
               <div className="feature-card">
                 <span className="feature-icon">🛡️</span>
-                <h3>Fraud Detection</h3>
-                <p>AI-powered analysis to identify suspicious job posts</p>
+                <h3>Advanced Fraud Detection</h3>
+                <p>AI analyzes job descriptions, company reviews, and salary patterns</p>
               </div>
               <div className="feature-card">
                 <span className="feature-icon">⭐</span>
                 <h3>Trust Scores</h3>
-                <p>Every job rated for authenticity and reliability</p>
+                <p>Every job rated 0-100% based on company verification and analysis</p>
               </div>
               <div className="feature-card">
-                <span className="feature-icon">👥</span>
-                <h3>Community Reports</h3>
-                <p>Help others by reporting fraudulent listings</p>
+                <span className="feature-icon">🏢</span>
+                <h3>Company Verification</h3>
+                <p>Real-time checks against company databases and online reviews</p>
               </div>
             </div>
           </div>
         )}
-        <Statistics />
       </main>
     </div>
   );

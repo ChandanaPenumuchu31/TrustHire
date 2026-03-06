@@ -1,13 +1,13 @@
 # 🛡️ TrustHire - AI-Powered Job Aggregation Platform
 
-**TrustHire** is a comprehensive job search platform that aggregates job listings from multiple sources (LinkedIn, Indeed, Naukri) and uses **Machine Learning & AI** to detect fraudulent job postings, providing users with trust scores for each listing.
+**TrustHire** is a comprehensive job search platform that aggregates job listings from multiple sources (Jooble, Indeed, Naukri) and uses **Machine Learning & AI** to detect fraudulent job postings, providing users with trust scores for each listing.
 
 ---
 
 ## 🎯 Key Features
 
 ### ✅ **Problem Solved**
-- **Multi-Platform Search**: Search across LinkedIn, Indeed, and Naukri simultaneously
+- **Multi-Platform Search**: Search across Jooble, Indeed, and Naukri simultaneously
 - **Fraud Detection**: AI/ML-powered fraud detection with trust scores (0-100%)
 - **Trust Scores**: Every job analyzed for authenticity
 - **Community Reporting**: Users can report suspicious listings
@@ -142,7 +142,7 @@ npm start
 - Enter job title (e.g., "Software Engineer", "Data Analyst")
 - Add location (optional, e.g., "San Francisco", "Remote")
 - Select experience level (Entry/Mid/Senior)
-- Choose platforms to search (All, LinkedIn, Indeed, Naukri)
+- Choose platforms to search (All, Jooble, Indeed, Naukri)
 - Click **"Search Jobs"**
 
 ### **2. View Results**
@@ -292,7 +292,7 @@ TrustHire/
 │   │   └── job_model.py       # Job aggregation
 │   ├── scrapers/
 │   │   ├── base_scraper.py    # Base scraper class
-│   │   ├── linkedin_scraper.py
+│   │   ├── jooble_scraper.py
 │   │   ├── indeed_scraper.py
 │   │   └── naukri_scraper.py
 │   └── utils/
